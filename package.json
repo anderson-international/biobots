@@ -1,0 +1,37 @@
+{
+  "name": "electro-flock",
+  "description": "Flocking & Game Theory Fun",
+  "private": true,
+  "version": "2.0.0",
+  "author": "biofractal",
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/biofractal-ltd/electro-flock#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/biofractal-ltd/electro-flock"
+  },
+  "prettier": {
+    "semi": false
+  },
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "build-dev": "webpack -d --mode development",
+    "build-prod": "webpack -p --mode production"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.6.0",
+    "p5": "^0.9.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.0",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-template": "^6.2.0",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
+  }
+}
