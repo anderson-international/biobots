@@ -5,13 +5,12 @@ class Vector {
     this.z = z
   }
 
-  static ensure(v) {
-    return typeof v == "Vector" ? v : new Vector(v, v, v)
-  }
-
   static div(v1, v2) {
     v2 = Vector.ensure(v2)
     return new Vector(v1.x / v2.x, v1.y / v2.y, v1.z / v2.z)
+  }
+  static ensure(v) {
+    return v.constructor.name == "Vector" ? v : new Vector(v, v, v)
   }
 
   add(v) {
@@ -29,7 +28,7 @@ class Vector {
   }
 
   heading() {
-    return Math.atan2(this.y, this.x)
+    return -Math.atan2(-this.y, this.x)
   }
 
   limit(high, low) {

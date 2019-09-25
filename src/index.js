@@ -2,6 +2,6 @@ import "@babel/polyfill"
 import World from "./world"
 
 new World({
-  background: 41,
+  background: 51,
   botcount: 10
 })

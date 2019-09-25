@@ -2,9 +2,10 @@ import Rnd from "./rnd"
 import Vector from "./vector"
 
 class Bot {
-  constructor({ mass = 2, maxVelocity = 5 } = {}) {
+  constructor({ mass = 4, maxVelocity = 1, fill = "lime" } = {}) {
     this.mass = mass
     this.maxVelocity = maxVelocity
+    this.fill = fill
     this.acceleration = new Vector()
     this.velocity = Rnd.velocity()
     this.location = Rnd.location()
@@ -15,8 +16,8 @@ class Bot {
     p5.translate(this.location.x, this.location.y)
     p5.rotate(this.velocity.heading())
     p5.scale(0.5 + this.mass / 8)
-    p5.fill(128, 255, 128)
-    p5.stroke(0, 255, 0)
+    p5.fill(this.fill)
+    p5.noStroke()
     p5.triangle(-4, 4, 8, 0, -4, -4)
     p5.pop()
   }

@@ -14,7 +14,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: require("html-webpack-template"),
       inject: false,
-      title: "Electro-Flock"
+      title: "BioBots"
     })
   ],
   module: {

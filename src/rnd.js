@@ -10,10 +10,10 @@ class Rnd {
     return Math.random() * max + min
   }
 
-  static location(margin = 0) {
+  static location() {
     return new Vector(
-      this.next(World.width - margin, margin),
-      this.next(World.height - margin, margin)
+      this.next(World.x2 + World.x4, World.x4),
+      this.next(World.y2 + World.y4, World.y4)
     )
   }
 

@@ -1,14 +1,14 @@
 {
-  "name": "electro-flock",
+  "name": "biobots",
   "description": "Flocking & Game Theory Fun",
   "private": true,
   "version": "2.0.0",
   "author": "biofractal",
   "license": "UNLICENSED",
-  "homepage": "https://github.com/biofractal-ltd/electro-flock#readme",
+  "homepage": "https://github.com/biofractal-ltd/biobots#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/biofractal-ltd/electro-flock"
+    "url": "https://github.com/biofractal-ltd/biobots"
   },
   "prettier": {
     "semi": false
