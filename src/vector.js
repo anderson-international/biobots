@@ -22,14 +22,14 @@ class Vector {
 
   divide(v) {
     v = Vector.ensure(v)
-    this.x /= v.x
-    this.y /= v.y
-    this.z /= v.z
+    if (this.x != 0) this.x /= v.x
+    if (this.y != 0) this.y /= v.y
+    if (this.z != 0) this.z /= v.z
   }
 
   dividePure(v) {
-    const clone = Vector.clone(v)
-    clone.divide(this)
+    const clone = Vector.clone(this)
+    clone.divide(v)
     return clone
   }
 
@@ -60,8 +60,8 @@ class Vector {
   }
 
   multiplyPure(v) {
-    const clone = Vector.clone(v)
-    clone.multiply(this)
+    const clone = Vector.clone(this)
+    clone.multiply(v)
     return clone
   }
 
@@ -70,8 +70,8 @@ class Vector {
     if (m > 0) this.divide(m)
   }
 
-  setZero(v) {
-    v.multiply(0)
+  setZero() {
+    this.multiply(0)
   }
 }
 
