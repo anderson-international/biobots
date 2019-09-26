@@ -1,5 +1,6 @@
-import * as P5 from "p5"
-import Bot from "./bot"
+import * as P5 from 'p5'
+import Bot from './bot'
+import edgeRepulse from './forces/edgeRepulse'
 
 class World {
   static width = document.documentElement.clientWidth
@@ -32,6 +33,7 @@ class World {
   draw(p5, { background = 41 }) {
     p5.background(background)
     for (let bot of this.bots) {
+      edgeRepulse.applyForce(bot)
       bot.move()
       bot.draw(p5)
     }

@@ -5,12 +5,12 @@ class Vector {
     this.z = z
   }
 
-  static div(v1, v2) {
-    v2 = Vector.ensure(v2)
-    return new Vector(v1.x / v2.x, v1.y / v2.y, v1.z / v2.z)
-  }
   static ensure(v) {
-    return v.constructor.name == "Vector" ? v : new Vector(v, v, v)
+    return v.constructor.name == 'Vector' ? v : new Vector(v, v, v)
+  }
+
+  static clone(v) {
+    return v.constructor.name == 'Vector' ? new Vector(v.x, v.y, v.z) : new Vector(v, v, v)
   }
 
   add(v) {
@@ -20,11 +20,17 @@ class Vector {
     this.z += v.z
   }
 
-  div(v) {
+  divide(v) {
     v = Vector.ensure(v)
     this.x /= v.x
     this.y /= v.y
     this.z /= v.z
+  }
+
+  dividePure(v) {
+    const clone = Vector.clone(v)
+    clone.divide(this)
+    return clone
   }
 
   heading() {
@@ -32,30 +38,40 @@ class Vector {
   }
 
   limit(high, low) {
-    const m = this.mag()
+    const m = this.magnitude()
     if (high && m > high) {
       this.normalize()
-      this.mult(high)
+      this.multiply(high)
     } else if (low && m < low) {
       this.normalize()
-      this.mult(low)
+      this.multiply(low)
     }
   }
 
-  mag() {
+  magnitude() {
     return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z)
   }
 
-  mult(v) {
+  multiply(v) {
     v = Vector.ensure(v)
     this.x *= v.x
     this.y *= v.y
     this.z *= v.z
   }
 
+  multiplyPure(v) {
+    const clone = Vector.clone(v)
+    clone.multiply(this)
+    return clone
+  }
+
   normalize() {
-    const m = this.mag()
-    if (m > 0) this.div(m)
+    const m = this.magnitude()
+    if (m > 0) this.divide(m)
+  }
+
+  setZero(v) {
+    v.multiply(0)
   }
 }
 

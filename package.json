@@ -11,7 +11,10 @@
     "url": "https://github.com/biofractal-ltd/biobots"
   },
   "prettier": {
-    "semi": false
+    "trailingComma": "es5",
+    "printWidth": 150,
+    "semi": false,
+    "singleQuote": true
   },
   "scripts": {
     "clean": "rm dist/bundle.js",

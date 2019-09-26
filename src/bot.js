@@ -1,8 +1,9 @@
-import Rnd from "./rnd"
-import Vector from "./vector"
+import Rnd from './rnd'
+import Vector from './vector'
 
 class Bot {
-  constructor({ mass = 4, maxVelocity = 1, fill = "lime" } = {}) {
+  constructor({ charge = 1, mass = 4, maxVelocity = 1, fill = 'lime' } = {}) {
+    this.charge = charge
     this.mass = mass
     this.maxVelocity = maxVelocity
     this.fill = fill
@@ -26,11 +27,11 @@ class Bot {
     this.velocity.add(this.acceleration)
     this.velocity.limit(this.maxVelocity)
     this.location.add(this.velocity)
-    this.acceleration.mult(0)
+    this.acceleration.setZero()
   }
 
   accelerate(force) {
-    this.acceleration.add(Vector.div(force, this.mass))
+    this.acceleration.add(force.dividePure(this.mass))
   }
 }
 
