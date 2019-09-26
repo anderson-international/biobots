@@ -1,5 +1,6 @@
 import * as P5 from 'p5'
 import Bot from './bot'
+import botRepulse from './forces/botRepulse'
 import edgeRepulse from './forces/edgeRepulse'
 
 class World {
@@ -26,13 +27,14 @@ class World {
   setup(p5, { botcount = 10 } = {}) {
     p5.createCanvas(World.width, World.height)
     for (var i = 0; i < botcount; i++) {
-      this.bots.push(new Bot())
+      this.bots.push(new Bot({ id: i }))
     }
   }
 
   draw(p5, { background = 41 }) {
     p5.background(background)
     for (let bot of this.bots) {
+      botRepulse.applyForce(this.bots, bot)
       edgeRepulse.applyForce(bot)
       bot.move()
       bot.draw(p5)

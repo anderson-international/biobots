@@ -1,7 +1,7 @@
 import Vector from '../vector'
 import World from '../world'
 
-const k = 1000
+const k = 100
 const edgeCharge = 10
 const left = new Vector(1, 0)
 const right = new Vector(-1, 0)

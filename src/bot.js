@@ -2,7 +2,8 @@ import Rnd from './rnd'
 import Vector from './vector'
 
 class Bot {
-  constructor({ charge = 1, mass = 4, maxVelocity = 1, fill = 'lime' } = {}) {
+  constructor({ id, charge = 1, mass = 4, maxVelocity = 3, fill = 'lime' } = {}) {
+    this.id = id
     this.charge = charge
     this.mass = mass
     this.maxVelocity = maxVelocity
@@ -21,6 +22,10 @@ class Bot {
     p5.noStroke()
     p5.triangle(-4, 4, 8, 0, -4, -4)
     p5.pop()
+  }
+
+  is(bot) {
+    return this.id == bot.id
   }
 
   move() {
