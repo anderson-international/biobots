@@ -1,27 +1,29 @@
 import Rnd from './rnd'
+import World from './world'
 import Vector from './vector'
 
 class Bot {
-  constructor({ id, charge = 1, mass = 4, maxVelocity = 3, fill = 'lime' } = {}) {
+  startBox = { max: { x: World.x2 + World.x4, y: World.y2 + World.y4 }, min: { x: World.x4, y: World.y4 } }
+  constructor({ id, mass = 1, maxVelocity = 3, fill = 'lime' } = {}) {
     this.id = id
-    this.charge = charge
     this.mass = mass
+    this.charge = this.mass / 5
     this.maxVelocity = maxVelocity
     this.fill = fill
     this.acceleration = new Vector()
-    this.velocity = Rnd.velocity()
-    this.location = Rnd.location()
+    this.velocity = Rnd.velocity(this.maxVelocity)
+    this.location = Rnd.location(this.startBox)
   }
 
-  draw(p5) {
-    p5.push()
-    p5.translate(this.location.x, this.location.y)
-    p5.rotate(this.velocity.heading())
-    p5.scale(0.5 + this.mass / 8)
-    p5.fill(this.fill)
-    p5.noStroke()
-    p5.triangle(-4, 4, 8, 0, -4, -4)
-    p5.pop()
+  draw() {
+    World.p5.push()
+    World.p5.translate(this.location.x, this.location.y)
+    World.p5.rotate(this.velocity.heading())
+    World.p5.scale(this.mass)
+    World.p5.fill(this.fill)
+    World.p5.noStroke()
+    World.p5.triangle(-4, 4, 8, 0, -4, -4)
+    World.p5.pop()
   }
 
   is(bot) {

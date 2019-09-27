@@ -3,5 +3,6 @@ import World from './world'
 
 new World({
   background: 51,
-  botcount: 100,
+  botCount: 100,
+  obstacleCount: 5,
 })

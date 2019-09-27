@@ -1,7 +1,9 @@
 import * as P5 from 'p5'
 import Bot from './bot'
-import botRepulse from './forces/botRepulse'
-import edgeRepulse from './forces/edgeRepulse'
+import Obstacle from './obstacle'
+import forceBot from './forceBot'
+import forceEdge from './forceEdge'
+import forceObstacle from './forceObstacle'
 
 class World {
   static width = document.documentElement.clientWidth
@@ -10,34 +12,42 @@ class World {
   static y2 = (this.height / 2) >> 0
   static x4 = (this.width / 4) >> 0
   static y4 = (this.height / 4) >> 0
-
-  bots = []
-
+  static obstacles = []
+  static bots = []
+  static p5
   constructor(opts) {
     new P5(p5 => {
+      World.p5 = p5
       p5.setup = () => {
-        this.setup(p5, opts)
+        this.setup(opts)
       }
       p5.draw = () => {
-        this.draw(p5, opts)
+        this.draw(opts)
       }
     })
   }
 
-  setup(p5, { botcount = 10 } = {}) {
-    p5.createCanvas(World.width, World.height)
-    for (var i = 0; i < botcount; i++) {
-      this.bots.push(new Bot({ id: i }))
+  setup({ botCount = 10, obstacleCount = 10 } = {}) {
+    World.p5.createCanvas(World.width, World.height)
+    for (var i = 0; i < obstacleCount; i++) {
+      World.obstacles.push(new Obstacle({ id: i }))
+    }
+    for (var i = 0; i < botCount; i++) {
+      World.bots.push(new Bot({ id: i }))
     }
   }
 
-  draw(p5, { background = 41 }) {
-    p5.background(background)
-    for (let bot of this.bots) {
-      botRepulse.applyForce(this.bots, bot)
-      edgeRepulse.applyForce(bot)
+  draw({ background = 41 }) {
+    World.p5.background(background)
+    for (let obstacle of World.obstacles) {
+      obstacle.draw()
+    }
+    for (let bot of World.bots) {
+      forceBot.apply(bot)
+      forceEdge.apply(bot)
+      forceObstacle.apply(bot)
       bot.move()
-      bot.draw(p5)
+      bot.draw()
     }
   }
 }
