@@ -32,6 +32,7 @@ class World {
     for (var i = 0; i < obstacleCount; i++) {
       World.obstacles.push(new Obstacle({ id: i }))
     }
+    World.obstacles.forEach(o => o.setLocation())
     for (var i = 0; i < botCount; i++) {
       World.bots.push(new Bot({ id: i }))
     }
