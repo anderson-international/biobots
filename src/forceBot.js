@@ -1,9 +1,10 @@
 import World from './world'
 
-const k = 1000
+const k = 10000
 const apply = subject => {
   for (const bot of World.bots) {
     if (subject.is(bot)) continue
+
     const charge = subject.charge * bot.charge
     const force = subject.location.subtractPure(bot.location)
     const distance = force.magnitude()

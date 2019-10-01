@@ -18,6 +18,10 @@ class Vector {
     this.y += v.y
   }
 
+  distanceTo(v) {
+    return this.subtractPure(v).magnitude()
+  }
+
   divide(v) {
     v = Vector.ensure(v)
     if (this.x != 0) this.x /= v.x
