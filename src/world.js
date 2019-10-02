@@ -21,6 +21,7 @@ class World {
   constructor(opts) {
     new P5(p5 => {
       World.p5 = p5
+      p5.disableFriendlyErrors = true
       p5.setup = () => {
         p5.rectMode('center')
         this.setup(opts)
@@ -48,6 +49,7 @@ class World {
     World.p5.background(opts.background)
     World.obstacles.forEach(o => o.draw())
     World.attractors.forEach(a => a.draw())
+
     for (let bot of World.bots) {
       forceBot.apply(bot)
       forceEdge.apply(bot)

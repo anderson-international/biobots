@@ -3,17 +3,10 @@ import World from './world'
 import Vector from './vector'
 
 class Bot {
-  static intersects(a) {
-    for (const b of World.bots) {
-      if (a.is(b)) continue
-      if (a.location.distanceTo(b.location) < 2) return true
-    }
-  }
-
   constructor({ id, mass = 1, maxVelocity = 3, minVelocity = 1, fill = 'lime' } = {}) {
     this.id = id
     this.mass = mass
-    this.charge = this.mass / 5
+    this.charge = this.mass / 10
     this.maxVelocity = maxVelocity
     this.minVelocity = minVelocity
     this.fill = fill
@@ -41,11 +34,11 @@ class Bot {
     this.velocity.add(this.acceleration)
     this.velocity.limit(this.maxVelocity, this.minVelocity)
     this.location.add(this.velocity)
-    this.acceleration.setZero()
+    this.acceleration.multiply(0)
   }
 
   accelerate(force) {
-    this.acceleration.add(force.dividePure(this.mass))
+    this.acceleration.add({ x: force.x / this.mass, y: force.y / this.mass })
   }
 }
 

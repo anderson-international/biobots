@@ -4,34 +4,24 @@ class Vector {
     this.y = y
   }
 
-  static ensure(v) {
-    return v.constructor.name == 'Vector' ? v : new Vector(v, v)
-  }
-
-  static clone(v) {
-    return v.constructor.name == 'Vector' ? new Vector(v.x, v.y) : new Vector(v, v)
+  static zero(v) {
+    return new Vector()
   }
 
   add(v) {
-    v = Vector.ensure(v)
+    const x = v.x ?? v
+    const y = v.y ?? v
     this.x += v.x
     this.y += v.y
-  }
-
-  distanceTo(v) {
-    return this.subtractPure(v).magnitude()
+    return this
   }
 
   divide(v) {
-    v = Vector.ensure(v)
-    if (this.x != 0) this.x /= v.x
-    if (this.y != 0) this.y /= v.y
-  }
-
-  dividePure(v) {
-    const clone = Vector.clone(this)
-    clone.divide(v)
-    return clone
+    const x = v.x ?? v
+    const y = v.y ?? v
+    if (x != 0) this.x /= x
+    if (y != 0) this.y /= y
+    return this
   }
 
   heading() {
@@ -50,40 +40,33 @@ class Vector {
   }
 
   magnitude() {
-    return Math.sqrt(this.x * this.x + this.y * this.y)
+    return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2))
   }
 
   multiply(v) {
-    v = Vector.ensure(v)
-    this.x *= v.x
-    this.y *= v.y
-  }
-
-  multiplyPure(v) {
-    const clone = Vector.clone(this)
-    clone.multiply(v)
-    return clone
+    const x = v.x ?? v
+    const y = v.y ?? v
+    this.x *= x
+    this.y *= y
+    return this
   }
 
   normalize() {
-    const m = this.magnitude()
-    if (m > 0) this.divide(m)
-  }
-
-  setZero() {
-    this.multiply(0)
+    this.divide(this.magnitude())
+    return this
   }
 
   subtract(v) {
-    v = Vector.ensure(v)
-    this.x -= v.x
-    this.y -= v.y
+    const x = v.x ?? v
+    const y = v.y ?? v
+    this.x -= x
+    this.y -= y
   }
 
   subtractPure(v) {
-    const clone = Vector.clone(this)
-    clone.subtract(v)
-    return clone
+    const x = v.x ?? v
+    const y = v.y ?? v
+    return new Vector(this.x - x, this.y - y)
   }
 }
 
