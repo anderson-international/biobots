@@ -3,10 +3,10 @@ import World from './world'
 import Vector from './vector'
 
 class Bot {
-  constructor({ id, mass = 1, maxVelocity = 3, minVelocity = 1, fill = 'lime' } = {}) {
+  constructor({ id, charge = 1, maxVelocity = 3, minVelocity = 1, fill = 'lime' } = {}) {
     this.id = id
-    this.mass = mass
-    this.charge = this.mass / 10
+    this.charge = charge
+    this.mass = charge * 10
     this.maxVelocity = maxVelocity
     this.minVelocity = minVelocity
     this.fill = fill

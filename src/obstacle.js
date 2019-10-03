@@ -31,7 +31,6 @@ class Obstacle {
   draw() {
     World.p5.push()
     World.p5.fill(this.fill)
-    World.p5.rectMode('center')
     World.p5.square(this.location.x, this.location.y, this.size)
     World.p5.pop()
   }

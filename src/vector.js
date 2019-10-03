@@ -4,10 +4,6 @@ class Vector {
     this.y = y
   }
 
-  static zero(v) {
-    return new Vector()
-  }
-
   add(v) {
     const x = v.x ?? v
     const y = v.y ?? v
@@ -53,7 +49,6 @@ class Vector {
 
   normalize() {
     this.divide(this.magnitude())
-    return this
   }
 
   subtract(v) {
@@ -61,6 +56,7 @@ class Vector {
     const y = v.y ?? v
     this.x -= x
     this.y -= y
+    return this
   }
 
   subtractPure(v) {
