@@ -2,10 +2,8 @@ import * as P5 from 'p5'
 import Bot from './bot'
 import Obstacle from './obstacle'
 import Attractor from './attractor'
-import forceBot from './forceBot'
+import forceCoulomb from './forceCoulomb'
 import forceEdge from './forceEdge'
-import forceObstacle from './forceObstacle'
-import forceAttractor from './forceAttractor'
 
 class World {
   static width = document.documentElement.clientWidth
@@ -17,6 +15,7 @@ class World {
   static obstacles = []
   static attractors = []
   static bots = []
+  static hawks = []
   static p5
   constructor(opts) {
     new P5(p5 => {
@@ -43,6 +42,9 @@ class World {
     for (var i = 0; i < opts.count.bot; i++) {
       World.bots.push(new Bot({ id: i }))
     }
+    for (var i = 0; i < opts.count.hawk; i++) {
+      World.hawks.push(new Bot({ id: i, fill: 'red' }))
+    }
   }
 
   draw(opts) {
@@ -51,12 +53,20 @@ class World {
     World.attractors.forEach(a => a.draw())
 
     for (let bot of World.bots) {
-      forceBot.apply(bot)
+      forceCoulomb.apply(bot, World.bots)
+      forceCoulomb.apply(bot, World.hawks)
+      forceCoulomb.apply(bot, World.obstacles)
+      forceCoulomb.apply(bot, World.attractors)
       forceEdge.apply(bot)
-      forceObstacle.apply(bot)
-      forceAttractor.apply(bot)
       bot.move()
       bot.draw()
+    }
+    for (let hawk of World.hawks) {
+      // forceCoulomb.apply(hawk, World.bots)
+      forceCoulomb.apply(hawk, World.obstacles)
+      forceEdge.apply(hawk)
+      hawk.move()
+      hawk.draw()
     }
   }
 }

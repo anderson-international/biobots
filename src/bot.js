@@ -3,10 +3,10 @@ import World from './world'
 import Vector from './vector'
 
 class Bot {
-  constructor({ id, charge = 1, maxVelocity = 3, minVelocity = 1, fill = 'lime' } = {}) {
+  constructor({ id, mass = 10, maxVelocity = 3, minVelocity = 1, fill = 'lime' } = {}) {
     this.id = id
-    this.charge = charge
-    this.mass = charge * 10
+    this.mass = mass
+    this.size = mass / 10
     this.maxVelocity = maxVelocity
     this.minVelocity = minVelocity
     this.fill = fill
@@ -19,7 +19,7 @@ class Bot {
     World.p5.push()
     World.p5.translate(this.location.x, this.location.y)
     World.p5.rotate(this.velocity.heading())
-    World.p5.scale(this.mass)
+    World.p5.scale(this.size)
     World.p5.fill(this.fill)
     World.p5.noStroke()
     World.p5.triangle(-4, 4, 8, 0, -4, -4)

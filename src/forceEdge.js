@@ -1,8 +1,7 @@
 import Vector from './vector'
 import World from './world'
+import { matrix } from './interactionMatrix'
 
-const k = 100
-const edgeCharge = 10
 const left = () => {
   return new Vector(1, 0)
 }
@@ -12,17 +11,17 @@ const right = () => {
 const top = () => {
   return new Vector(0, 1)
 }
-const bottom = () => {
+const subjecttom = () => {
   return new Vector(0, -1)
 }
 
-const apply = bot => {
-  const { x, y } = bot.location
-  const c = Math.abs(bot.charge) * edgeCharge
-  bot.accelerate(left().multiply(k * (c / Math.pow(x, 2))))
-  bot.accelerate(right().multiply(k * (c / Math.pow(World.width - x, 2))))
-  bot.accelerate(top().multiply(k * (c / Math.pow(y, 2))))
-  bot.accelerate(bottom().multiply(k * (c / Math.pow(World.height - y, 2))))
+const apply = subject => {
+  const { x, y } = subject.location
+  const { charge, power, k } = matrix[subject.constructor.name]['Edge']
+  subject.accelerate(left().multiply(k * (charge / Math.pow(x, power))))
+  subject.accelerate(right().multiply(k * (charge / Math.pow(World.width - x, power))))
+  subject.accelerate(top().multiply(k * (charge / Math.pow(y, power))))
+  subject.accelerate(subjecttom().multiply(k * (charge / Math.pow(World.height - y, power))))
 }
 
 export default { apply }
