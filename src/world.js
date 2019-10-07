@@ -1,9 +1,10 @@
 import * as P5 from 'p5'
-import Bot from './bot'
+import Dove from './dove'
+import Hawk from './hawk'
 import Obstacle from './obstacle'
 import Attractor from './attractor'
-import forceCoulomb from './forceCoulomb'
 import forceEdge from './forceEdge'
+import forceCoulomb from './forceCoulomb'
 
 class World {
   static width = document.documentElement.clientWidth
@@ -14,7 +15,7 @@ class World {
   static y4 = (this.height / 4) >> 0
   static obstacles = []
   static attractors = []
-  static bots = []
+  static doves = []
   static hawks = []
   static p5
   constructor(opts) {
@@ -39,11 +40,11 @@ class World {
     for (var i = 0; i < opts.count.attractor; i++) {
       World.attractors.push(new Attractor({ id: i }))
     }
-    for (var i = 0; i < opts.count.bot; i++) {
-      World.bots.push(new Bot({ id: i }))
+    for (var id = 0; id < opts.count.dove; id++) {
+      World.doves.push(new Dove(id))
     }
-    for (var i = 0; i < opts.count.hawk; i++) {
-      World.hawks.push(new Bot({ id: i, fill: 'red' }))
+    for (var id = 0; id < opts.count.hawk; id++) {
+      World.hawks.push(new Hawk(id))
     }
   }
 
@@ -52,17 +53,19 @@ class World {
     World.obstacles.forEach(o => o.draw())
     World.attractors.forEach(a => a.draw())
 
-    for (let bot of World.bots) {
-      forceCoulomb.apply(bot, World.bots)
-      forceCoulomb.apply(bot, World.hawks)
-      forceCoulomb.apply(bot, World.obstacles)
-      forceCoulomb.apply(bot, World.attractors)
-      forceEdge.apply(bot)
-      bot.move()
-      bot.draw()
+    for (let dove of World.doves) {
+      forceCoulomb.apply(dove, World.doves)
+      forceCoulomb.apply(dove, World.hawks)
+      forceCoulomb.apply(dove, World.obstacles)
+      forceCoulomb.apply(dove, World.attractors)
+      forceEdge.apply(dove)
+      dove.move()
+      dove.draw()
     }
+
     for (let hawk of World.hawks) {
-      // forceCoulomb.apply(hawk, World.bots)
+      forceCoulomb.apply(hawk, World.doves)
+      forceCoulomb.apply(hawk, World.hawks)
       forceCoulomb.apply(hawk, World.obstacles)
       forceEdge.apply(hawk)
       hawk.move()

@@ -1,6 +1,6 @@
 import Vector from './vector'
 import World from './world'
-import { matrix } from './interactionMatrix'
+import { matrix } from './interaction-matrix'
 
 const left = () => {
   return new Vector(1, 0)

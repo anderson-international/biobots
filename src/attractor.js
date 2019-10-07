@@ -18,9 +18,8 @@ class Attractor {
 
   constructor({ id, fill = 'steelblue' } = {}) {
     this.id = id
-    this.mass = Rnd.next(5, 2)
-    this.charge = -this.mass
-    this.size = this.mass * 25
+    this.mass = Rnd.next(50, 10)
+    this.size = this.mass * 2
     this.fill = fill
     do {
       this.location = Rnd.location({ max: { x: World.width - this.size * 2, y: World.height - this.size * 2 }, min: { x: this.size, y: this.size } })

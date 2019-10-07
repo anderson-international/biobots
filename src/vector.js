@@ -47,6 +47,12 @@ class Vector {
     return this
   }
 
+  multiplyPure(v) {
+    const x = v.x ?? v
+    const y = v.y ?? v
+    return new Vector(this.x * x, this.y * y)
+  }
+
   normalize() {
     this.divide(this.magnitude())
   }

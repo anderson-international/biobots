@@ -4,9 +4,9 @@ import World from './world'
 new World({
   background: 51,
   count: {
-    bot: 50,
+    dove: 50,
+    hawk: 1,
     obstacle: 0,
     attractor: 3,
-    hawk: 1,
   },
 })
