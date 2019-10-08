@@ -35,8 +35,11 @@ class Vector {
     }
   }
 
-  magnitude() {
-    return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2))
+  magnitude(max, min) {
+    var m = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2))
+    if (min && m < min) return min
+    if (max && m > max) return max
+    return m
   }
 
   multiply(v) {

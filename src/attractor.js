@@ -1,13 +1,26 @@
 import Rnd from './rnd'
 import World from './world'
+import Particle from './particle'
 
-class Attractor {
+class Attractor extends Particle {
+  constructor(id) {
+    super({
+      id,
+      mass: Rnd.next(75, 25),
+      fill: 'steelblue',
+    })
+    this.size = this.mass * 2
+    do {
+      this.location = Rnd.location({ max: { x: World.width - this.size * 2, y: World.height - this.size * 2 }, min: { x: this.size, y: this.size } })
+    } while (Attractor.intersects(this) == true)
+  }
+
   static intersects(a) {
     const x1 = a.location.x
     const y1 = a.location.y
     const r1 = a.size
     for (const b of World.attractors) {
-      if (a.is(b)) continue
+      if (a === b) continue
       const x2 = b.location.x
       const y2 = b.location.y
       const r2 = b.size
@@ -16,25 +29,11 @@ class Attractor {
     }
   }
 
-  constructor({ id, fill = 'steelblue' } = {}) {
-    this.id = id
-    this.mass = Rnd.next(50, 10)
-    this.size = this.mass * 2
-    this.fill = fill
-    do {
-      this.location = Rnd.location({ max: { x: World.width - this.size * 2, y: World.height - this.size * 2 }, min: { x: this.size, y: this.size } })
-    } while (Attractor.intersects(this) == true)
-  }
-
   draw() {
     World.p5.push()
     World.p5.fill(this.fill)
     World.p5.circle(this.location.x, this.location.y, this.size)
     World.p5.pop()
-  }
-
-  is(compare) {
-    return this.id == compare.id
   }
 }
 

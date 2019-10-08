@@ -24,6 +24,7 @@ class World {
       p5.disableFriendlyErrors = true
       p5.setup = () => {
         p5.rectMode('center')
+        p5.noStroke()
         this.setup(opts)
       }
       p5.draw = () => {
@@ -33,9 +34,9 @@ class World {
   }
 
   setup(opts) {
-    World.p5.createCanvas(World.width, World.height)
-    for (var i = 0; i < opts.count.obstacle; i++) {
-      World.obstacles.push(new Obstacle({ id: i }))
+    const canvas = World.p5.createCanvas(World.width, World.height)
+    for (var id = 0; id < opts.count.obstacle; id++) {
+      World.obstacles.push(new Obstacle(id))
     }
     for (var i = 0; i < opts.count.attractor; i++) {
       World.attractors.push(new Attractor({ id: i }))

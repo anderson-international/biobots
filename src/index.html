@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8" />
+    <meta content="ie=edge" http-equiv="x-ua-compatible" />
+    <title>BioBots</title>
+    <style>
+      div.header {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        background-color: gray;
+        text-align: center;
+      }
+      canvas {
+        position: fixed;
+        top: 500;
+        left: 0;
+        margin: 10;
+        padding: 10;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="header"><input type="range" name="charge" min="-25" max="25" value="7" /></div>
+      <div id="canvas-holder"></div>
+    </div>
+    <script src="index_files/bundle.js" type="text/javascript"></script>
+  </body>
+</html>

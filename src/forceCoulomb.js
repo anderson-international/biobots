@@ -13,11 +13,7 @@ const apply = (subject, objects) => {
 
 const getForce = (subject, object, { charge, power, k }) => {
   const force = subject.location.subtractPure(object.location)
-  var distance = force.magnitude()
-
-  if (distance < 50) distance = 50
-  else if (distance > 250) distance = 250
-
+  var distance = force.magnitude(250, object.size)
   force.normalize()
   force.multiply(k * (charge / Math.pow(distance, power)))
   return force
