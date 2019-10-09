@@ -7,8 +7,7 @@ class Bot extends Particle {
   constructor(args) {
     super(args)
     this.size = this.mass / 10
-    this.maxVelocity = args.maxVelocity
-    this.minVelocity = args.minVelocity
+    this.rangeVelocity = args.rangeVelocity
     this.acceleration = new Vector()
     this.velocity = Rnd.velocity(this.maxVelocity)
     this.location = Rnd.location({
@@ -29,7 +28,7 @@ class Bot extends Particle {
 
   move() {
     this.velocity.add(this.acceleration)
-    this.velocity.limit(this.maxVelocity, this.minVelocity)
+    this.velocity.limit(this.rangeVelocity)
     this.location.add(this.velocity)
     this.acceleration.multiply(0)
   }

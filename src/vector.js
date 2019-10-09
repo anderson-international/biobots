@@ -24,18 +24,13 @@ class Vector {
     return -Math.atan2(-this.y, this.x)
   }
 
-  limit(high, low) {
-    const m = this.magnitude()
-    if (high && m > high) {
-      this.normalize()
-      this.multiply(high)
-    } else if (low && m < low) {
-      this.normalize()
-      this.multiply(low)
-    }
+  limit(range) {
+    const m = this.magnitude(range)
+    this.normalize()
+    this.multiply(m)
   }
 
-  magnitude(max, min) {
+  magnitude({ min, max } = {}) {
     var m = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2))
     if (min && m < min) return min
     if (max && m > max) return max

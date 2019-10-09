@@ -5,8 +5,8 @@ new World({
   background: 51,
   count: {
     dove: 100,
-    hawk: 0,
+    hawk: 1,
     obstacle: 0,
-    attractor: 1,
+    attractor: 5,
   },
 })

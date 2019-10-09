@@ -11,9 +11,9 @@ const apply = (subject, objects) => {
   }
 }
 
-const getForce = (subject, object, { charge, power, k }) => {
+const getForce = (subject, object, { charge, power, k, decayUntil, riseUntil }) => {
   const force = subject.location.subtractPure(object.location)
-  var distance = force.magnitude(250, object.size)
+  var distance = force.magnitude({ max: decayUntil, min: riseUntil })
   force.normalize()
   force.multiply(k * (charge / Math.pow(distance, power)))
   return force
