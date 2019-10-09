@@ -11,7 +11,10 @@ class Bot extends Particle {
     this.minVelocity = args.minVelocity
     this.acceleration = new Vector()
     this.velocity = Rnd.velocity(this.maxVelocity)
-    this.location = Rnd.location({ max: { x: World.x2 + World.x4, y: World.y2 + World.y4 }, min: { x: World.x4, y: World.y4 } })
+    this.location = Rnd.location({
+      max: { x: World.p5.windowWidth * 0.75, y: World.p5.windowHeight * 0.75 },
+      min: { x: World.p5.windowWidth * 0.25, y: World.p5.windowHeight * 0.25 },
+    })
   }
 
   draw() {

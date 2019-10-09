@@ -12,9 +12,9 @@ const config = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-      inject: true,
-      filename: 'index.html',
+      template: require('html-webpack-template'),
+      inject: false,
+      title: 'BioBots',
     }),
   ],
   module: {

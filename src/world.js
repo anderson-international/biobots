@@ -5,14 +5,9 @@ import Obstacle from './obstacle'
 import Attractor from './attractor'
 import forceEdge from './forceEdge'
 import forceCoulomb from './forceCoulomb'
+import './index.css'
 
 class World {
-  static width = document.documentElement.clientWidth
-  static height = document.documentElement.clientHeight
-  static x2 = (this.width / 2) >> 0
-  static y2 = (this.height / 2) >> 0
-  static x4 = (this.width / 4) >> 0
-  static y4 = (this.height / 4) >> 0
   static obstacles = []
   static attractors = []
   static doves = []
@@ -23,18 +18,21 @@ class World {
       World.p5 = p5
       p5.disableFriendlyErrors = true
       p5.setup = () => {
-        p5.rectMode('center')
-        p5.noStroke()
         this.setup(opts)
       }
       p5.draw = () => {
         this.draw(opts)
       }
+      p5.windowResized = () => {
+        p5.resizeCanvas(p5.windowWidth, p5.windowHeight)
+      }
     })
   }
 
   setup(opts) {
-    const canvas = World.p5.createCanvas(World.width, World.height)
+    World.p5.rectMode('center')
+    World.p5.noStroke()
+    const canvas = World.p5.createCanvas(World.p5.windowWidth, World.p5.windowHeight)
     for (var id = 0; id < opts.count.obstacle; id++) {
       World.obstacles.push(new Obstacle(id))
     }

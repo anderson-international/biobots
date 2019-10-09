@@ -11,7 +11,10 @@ class Attractor extends Particle {
     })
     this.size = this.mass * 2
     do {
-      this.location = Rnd.location({ max: { x: World.width - this.size * 2, y: World.height - this.size * 2 }, min: { x: this.size, y: this.size } })
+      this.location = Rnd.location({
+        max: { x: World.p5.windowWidth - this.size * 2, y: World.p5.windowHeight - this.size * 2 },
+        min: { x: this.size, y: this.size },
+      })
     } while (Attractor.intersects(this) == true)
   }
 

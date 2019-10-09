@@ -1,7 +1,10 @@
+body {
+  background-color: red;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
 canvas {
-  position: fixed;
-  top: 50;
-  left: 0;
-  margin: 10;
-  padding: 10;
+  margin: auto;
+  display: block;
 }
