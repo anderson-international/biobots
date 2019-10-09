@@ -5,7 +5,7 @@ class Dove extends Bot {
     super({
       id: id,
       mass: 10,
-      rangeVelocity: { max: 4, min: 1 },
+      rangeVelocity: { max: 2.5, min: 1 },
       fill: 'lime',
     })
   }

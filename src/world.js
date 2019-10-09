@@ -1,3 +1,4 @@
+import './index.css'
 import * as P5 from 'p5'
 import Dove from './dove'
 import Hawk from './hawk'
@@ -5,7 +6,6 @@ import Obstacle from './obstacle'
 import Attractor from './attractor'
 import forceEdge from './forceEdge'
 import forceCoulomb from './forceCoulomb'
-import './index.css'
 
 class World {
   static obstacles = []

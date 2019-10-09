@@ -5,7 +5,7 @@ class Hawk extends Bot {
     super({
       id: id,
       mass: 20,
-      rangeVelocity: { max: 3.5, min: 1 },
+      rangeVelocity: { max: 2, min: 1 },
       fill: 'red',
     })
   }
