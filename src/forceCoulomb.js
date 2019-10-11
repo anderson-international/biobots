@@ -1,8 +1,8 @@
 import Vector from './vector'
-import { matrix } from './interaction-matrix'
+import settings from './settings.json'
 
 const apply = (subject, objects) => {
-  const interaction = matrix[subject.constructor.name]?.[objects?.[0]?.constructor.name]
+  const interaction = settings[subject.constructor.name]?.[objects?.[0]?.constructor.name]
   if (!interaction) return
 
   for (const object of objects) {

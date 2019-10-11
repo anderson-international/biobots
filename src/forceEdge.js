@@ -1,6 +1,6 @@
 import Vector from './vector'
 import World from './world'
-import { matrix } from './interaction-matrix'
+import settings from './settings.json'
 
 const left = () => {
   return new Vector(1, 0)
@@ -17,7 +17,7 @@ const subjecttom = () => {
 
 const apply = subject => {
   const { x, y } = subject.location
-  const { charge, power, k } = matrix[subject.constructor.name]['Edge']
+  const { charge, power, k } = settings[subject.constructor.name]['Edge']
   subject.accelerate(left().multiply(k * (charge / Math.pow(x, power))))
   subject.accelerate(right().multiply(k * (charge / Math.pow(World.p5.windowWidth - x, power))))
   subject.accelerate(top().multiply(k * (charge / Math.pow(y, power))))
