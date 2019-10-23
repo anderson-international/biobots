@@ -8,6 +8,7 @@ import Attractor from './attractor'
 import forceEdge from './forceEdge'
 import forceCoulomb from './forceCoulomb'
 import userInterface from './userInterface'
+import settings from './settings.json'
 
 class World {
   static obstacles = []
@@ -15,15 +16,15 @@ class World {
   static doves = []
   static hawks = []
   static p5
-  constructor(opts) {
+  constructor() {
     new P5(p5 => {
       World.p5 = p5
       p5.disableFriendlyErrors = true
       p5.setup = () => {
-        this.setup(opts)
+        this.setup()
       }
       p5.draw = () => {
-        this.draw(opts)
+        this.draw()
       }
       p5.windowResized = () => {
         p5.resizeCanvas(p5.windowWidth, p5.windowHeight)
@@ -31,27 +32,38 @@ class World {
     })
   }
 
-  setup(opts) {
+  setup() {
     World.p5.rectMode('center')
     World.p5.noStroke()
     World.p5.createCanvas(World.p5.windowWidth, World.p5.windowHeight)
     userInterface.generate(World.p5)
-    for (var id = 0; id < opts.count.obstacle; id++) {
+    World.reset()
+  }
+
+  static reset() {
+    World.obstacles = []
+    for (var id = 0; id < settings.World.obstacles; id++) {
       World.obstacles.push(new Obstacle(id))
     }
-    for (var i = 0; i < opts.count.attractor; i++) {
+
+    World.attractors = []
+    for (var i = 0; i < settings.World.attractors; i++) {
       World.attractors.push(new Attractor({ id: i }))
     }
-    for (var id = 0; id < opts.count.dove; id++) {
+
+    World.doves = []
+    for (var id = 0; id < settings.World.doves; id++) {
       World.doves.push(new Dove(id))
     }
-    for (var id = 0; id < opts.count.hawk; id++) {
+
+    World.hawks = []
+    for (var id = 0; id < settings.World.hawks; id++) {
       World.hawks.push(new Hawk(id))
     }
   }
 
-  draw(opts) {
-    World.p5.background(opts.background)
+  draw() {
+    World.p5.background(52)
     World.obstacles.forEach(o => o.draw())
     World.attractors.forEach(a => a.draw())
 

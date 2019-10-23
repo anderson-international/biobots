@@ -1,11 +1,14 @@
 import settings from './settings.json'
+import World from './world'
 
-const generate = p5 => {
-  generateSettings(p5)
+export function generate() {
+  // makeButtonCopySettings()
+  makeSelectColoumbicMappings()
 }
 
-const generateSettings = p5 => {
-  p5.createButton('Copy Settings')
+function makeButtonCopySettings() {
+  World.p5
+    .createButton('Copy Settings')
     .size(100)
     .position(10, 10)
     .mousePressed(() => {
@@ -19,49 +22,63 @@ const generateSettings = p5 => {
       document.execCommand('copy')
       document.body.removeChild(el)
     })
+}
 
-  const selectSubject = p5.createSelect()
+function makeSelectColoumbicMappings() {
+  const selectSubject = World.p5.createSelect()
+  let selectObject = World.p5.createSelect()
+
+  selectSubject.option('select...')
+  Object.keys(settings).forEach(key => selectSubject.option(key))
   selectSubject
     .size(100)
-    .position(10, 40)
+    .position(10, 20)
     .changed(() => {
-      for (var i = selectObject.elt.options.length - 1; i >= 0; i--) {
-        selectObject.elt.remove(i)
+      clearTextInputs()
+      selectObject.remove()
+      if (selectSubject.value() === 'World') {
+        generateTextInputs(settings[selectSubject.value()], true)
+        return
       }
       const subject = settings[selectSubject.value()]
-      if (subject) {
-        selectObject.option('select...')
-        Object.keys(subject).forEach(key => selectObject.option(key))
-      }
-    })
-    .option('select...')
-  Object.keys(settings).forEach(key => selectSubject.option(key))
-
-  const selectObject = p5.createSelect()
-  selectObject
-    .size(100)
-    .position(10, 70)
-    .changed(() => {
-      p5.selectAll('input').forEach(i => i.remove())
-      p5.selectAll('span').forEach(i => i.remove())
-      const object = settings[selectSubject.value()]?.[selectObject.value()]
-      if (object) {
-        var count = 0
-        Object.entries(object).forEach(([key, value]) => {
-          const input = p5
-            .createInput(value.toString())
-            .size(50)
-            .position(120, 10 + 30 * count)
-            .changed(() => {
-              object[key] = input.value()
-            })
-          p5.createElement('span', key)
-            .position(180, 12 + 30 * count)
-            .style('color:white')
-          count++
+      selectObject = World.p5.createSelect()
+      selectObject.option('select...')
+      Object.keys(subject).forEach(key => selectObject.option(key))
+      selectObject
+        .size(100)
+        .position(10, 50)
+        .changed(() => {
+          generateTextInputs(settings[selectSubject.value()]?.[selectObject.value()])
         })
-      }
     })
 }
 
+function clearTextInputs() {
+  World.p5.selectAll('input').forEach(i => i.remove())
+  World.p5.selectAll('span').forEach(i => i.remove())
+}
+
+function generateTextInputs(source, reset = false) {
+  if (source) {
+    clearTextInputs()
+    var count = 0
+    Object.entries(source).forEach(([key, value]) => {
+      const input = World.p5
+        .createInput(value.toString())
+        .size(50)
+        .position(120, 20 + 30 * count)
+        .changed(() => {
+          source[key] = input.value()
+          if (reset === true) {
+            World.reset()
+          }
+        })
+      World.p5
+        .createElement('span', key)
+        .position(120 + 60, 20 + 30 * count)
+        .style('color:white')
+      count++
+    })
+  }
+}
 export default { generate }
